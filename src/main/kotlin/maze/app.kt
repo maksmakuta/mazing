@@ -7,7 +7,7 @@ import maze.enums.Solver
 fun main() {
     val app = MazeApp()
     app.setSize(20,20)
-    app.withGenerator(Generator.DFS)
+    app.withGenerator(Generator.IRP)
     app.withSolver(Solver.RND)
     app.withPrinter(Printer.WIDE)
     val t = app.exec()
