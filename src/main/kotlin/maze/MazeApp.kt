@@ -55,6 +55,7 @@ class MazeApp{
     }
 
     fun exec(seed : Long = randSeed()): Duration {
+        println("seed : $seed")
         val m = gen.generate(seed)
         m.solve(sol)
         prt.print(m)

@@ -9,6 +9,9 @@ class Maze(
     val h : Int
 ) : IMaze {
 
+    var start = Pair(1,1)
+    var finish = Pair(w-2,h-2)
+
     private val data = Array(w){x ->
         Array(h){y ->
             if((x == 0 || x == w-1)){
@@ -36,11 +39,11 @@ class Maze(
     override fun size() = Pair(w,h)
 
     override fun start(): Pair<Int, Int> {
-        return Pair(0,0)
+        return start
     }
 
     override fun end(): Pair<Int, Int> {
-        return Pair(w-1,h-1)
+        return finish
     }
 
     override operator fun set(x: Int, y: Int, cell: Cell) {
