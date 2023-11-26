@@ -58,7 +58,8 @@ class Maze(
 
     override fun solve(solver: ISolvable?) {
         solver?.solve(this)?.forEach { (x,y) ->
-            set(x,y,Cell.PATH)
+            if(Pair(x,y) !in listOf(start(),end()) )
+                set(x,y,Cell.PATH)
         }
     }
 }

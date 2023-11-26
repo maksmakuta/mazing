@@ -10,6 +10,7 @@ import maze.generator.DFSGenerator
 import maze.generator.PrimGenerator
 import maze.generator.RandomGenerator
 import maze.printer.WidePrinter
+import maze.solver.DFSSolver
 import maze.solver.WalkerSolver
 import kotlin.random.Random
 import kotlin.time.Duration
@@ -39,7 +40,7 @@ class MazeApp{
             Solver.RND      -> WalkerSolver()
             Solver.Astar    -> WalkerSolver()
             Solver.WFS      -> WalkerSolver()
-            Solver.DFS      -> WalkerSolver()
+            Solver.DFS      -> DFSSolver()
         }
     }
 
