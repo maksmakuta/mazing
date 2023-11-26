@@ -8,7 +8,7 @@ import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class RandomGenerator(size : Pair<Int,Int>) : AGenerator(size) {
+class RandomGenerator(override var size: Pair<Int, Int>) : AGenerator {
 
     private var t = Duration.ZERO
 
@@ -20,8 +20,9 @@ class RandomGenerator(size : Pair<Int,Int>) : AGenerator(size) {
             for (i in 1..<size.first-1) {
                 for (j in 1..<size.second-1) {
                     val s = rnd.nextInt(1, 100)
-                    m[i, j] = if ((i == 1 && j == 2) || (i == 2 && j == 1)) Cell.EMPTY
-                        else if (s < 35 && walls.find { it == j - 1 } == null) {
+                    m[i, j] = if ((i == 1 && j == 2) || (i == 2 && j == 1)) {
+                        Cell.EMPTY
+                    }else if (s < 35 && walls.find { it == j - 1 } == null) {
                             walls.add(j)
                             Cell.WALL
                         } else {

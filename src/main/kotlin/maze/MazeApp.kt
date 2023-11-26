@@ -9,8 +9,11 @@ import maze.enums.Solver
 import maze.generator.DFSGenerator
 import maze.generator.PrimGenerator
 import maze.generator.RandomGenerator
+import maze.printer.BoxPrinter
 import maze.printer.WidePrinter
+import maze.solver.BFSSolver
 import maze.solver.DFSSolver
+import maze.solver.StarSolver
 import maze.solver.WalkerSolver
 import kotlin.random.Random
 import kotlin.time.Duration
@@ -38,15 +41,15 @@ class MazeApp{
     fun withSolver(solver: Solver) {
         sol = when (solver){
             Solver.RND      -> WalkerSolver()
-            Solver.Astar    -> WalkerSolver()
-            Solver.WFS      -> WalkerSolver()
+            Solver.Astar    -> StarSolver()
+            Solver.BFS      -> BFSSolver()
             Solver.DFS      -> DFSSolver()
         }
     }
 
     fun withPrinter(prnt : Printer){
         prt = when(prnt){
-            Printer.BOX -> WidePrinter()
+            Printer.BOX -> BoxPrinter()
             Printer.WIDE -> WidePrinter()
         }
     }
@@ -55,11 +58,13 @@ class MazeApp{
         return Random.nextLong()
     }
 
-    fun exec(seed : Long = randSeed()): Duration {
+    fun getGenTime() = gen.time()
+    fun getSolTime() = sol?.time() ?: Duration.ZERO
+
+    fun exec(seed : Long = randSeed()){
         println("seed : $seed")
         val m = gen.generate(seed)
         m.solve(sol)
         prt.print(m)
-        return gen.time()
     }
 }

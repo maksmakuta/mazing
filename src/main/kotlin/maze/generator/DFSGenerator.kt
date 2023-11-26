@@ -9,7 +9,7 @@ import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class DFSGenerator(size: Pair<Int, Int>) : AGenerator(size) {
+class DFSGenerator(override var size: Pair<Int, Int>) : AGenerator {
 
     private var t = Duration.ZERO
     private val visited: Array<Array<Boolean>> = Array(size.second) { Array(size.first) { false } }

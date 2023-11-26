@@ -8,7 +8,7 @@ import java.util.*
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class PrimGenerator(size: Pair<Int, Int>) : AGenerator(size) {
+class PrimGenerator(override var size: Pair<Int, Int>) : AGenerator {
 
     private var rand = Random()
     private var t = Duration.ZERO
