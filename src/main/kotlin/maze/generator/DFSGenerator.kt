@@ -1,7 +1,7 @@
 package maze.generator
 
 import maze.Maze
-import maze.core.AGenerator
+import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell
 import java.util.*
@@ -9,7 +9,7 @@ import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class DFSGenerator(override var size: Pair<Int, Int>) : AGenerator {
+class DFSGenerator(override var size: Pair<Int, Int>) : IGenerator {
 
     private var t = Duration.ZERO
     private val visited: Array<Array<Boolean>> = Array(size.second) { Array(size.first) { false } }
@@ -23,6 +23,7 @@ class DFSGenerator(override var size: Pair<Int, Int>) : AGenerator {
     override fun generate(seed : Long): IMaze {
         val rand = Random(seed)
         val m = Maze(size.first,size.second)
+        m.seed = seed
         m.fill(Cell.WALL)
         t = measureTime {
             run(m, rand)

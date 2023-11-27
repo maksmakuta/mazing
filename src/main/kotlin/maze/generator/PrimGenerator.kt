@@ -1,14 +1,14 @@
 package maze.generator
 
 import maze.Maze
-import maze.core.AGenerator
+import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell
 import java.util.*
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class PrimGenerator(override var size: Pair<Int, Int>) : AGenerator {
+class PrimGenerator(override var size: Pair<Int, Int>) : IGenerator {
 
     private var rand = Random()
     private var t = Duration.ZERO
@@ -19,6 +19,7 @@ class PrimGenerator(override var size: Pair<Int, Int>) : AGenerator {
     override fun generate(seed: Long): IMaze {
         rand = Random(seed)
         val m = Maze(size.first, size.second)
+        m.seed = seed
         m.fill(Cell.WALL)
         t = measureTime {
             generateMaze(m)

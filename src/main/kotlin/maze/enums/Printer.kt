@@ -2,5 +2,6 @@ package maze.enums
 
 enum class Printer {
     WIDE,
-    BOX
+    BOX,
+    IMG
 }

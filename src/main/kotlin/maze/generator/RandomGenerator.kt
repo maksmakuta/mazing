@@ -1,20 +1,21 @@
 package maze.generator
 
 import maze.Maze
-import maze.core.AGenerator
+import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell
 import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class RandomGenerator(override var size: Pair<Int, Int>) : AGenerator {
+class RandomGenerator(override var size: Pair<Int, Int>) : IGenerator {
 
     private var t = Duration.ZERO
 
     override fun generate(seed : Long): IMaze {
         val rnd = Random(seed)
         val m = Maze(size.first,size.second)
+        m.seed = seed
         t = measureTime {
             val walls = mutableListOf<Int>()
             for (i in 1..<size.first-1) {

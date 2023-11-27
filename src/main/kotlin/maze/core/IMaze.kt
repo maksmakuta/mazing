@@ -3,6 +3,7 @@ package maze.core
 import maze.enums.Cell
 
 interface IMaze {
+    var seed : Long
     fun size() : Pair<Int,Int>
     fun start() : Pair<Int,Int>
     fun end() : Pair<Int,Int>

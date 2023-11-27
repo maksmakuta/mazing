@@ -1,6 +1,6 @@
 package maze
 
-import maze.core.AGenerator
+import maze.core.IGenerator
 import maze.core.IPrinter
 import maze.core.ISolvable
 import maze.enums.Generator
@@ -10,6 +10,7 @@ import maze.generator.DFSGenerator
 import maze.generator.PrimGenerator
 import maze.generator.RandomGenerator
 import maze.printer.BoxPrinter
+import maze.printer.ImagePrinter
 import maze.printer.WidePrinter
 import maze.solver.BFSSolver
 import maze.solver.DFSSolver
@@ -21,7 +22,7 @@ import kotlin.time.Duration
 class MazeApp{
 
     private var size = Pair(5,5)
-    private var gen : AGenerator = RandomGenerator(size)
+    private var gen : IGenerator = RandomGenerator(size)
     private var sol : ISolvable? = null
     private var prt : IPrinter = WidePrinter()
 
@@ -51,6 +52,7 @@ class MazeApp{
         prt = when(prnt){
             Printer.BOX -> BoxPrinter()
             Printer.WIDE -> WidePrinter()
+            Printer.IMG -> ImagePrinter()
         }
     }
 

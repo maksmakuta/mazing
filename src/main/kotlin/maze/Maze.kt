@@ -36,6 +36,8 @@ class Maze(
         }
     }
 
+    override var seed: Long = Long.MIN_VALUE
+
     override fun size() = Pair(w,h)
 
     override fun start(): Pair<Int, Int> {
