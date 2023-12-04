@@ -1,5 +1,5 @@
 package maze.core
 
-interface ISolvable : SpeedTimer{
+interface ISolvable : ITimer{
     fun solve(maze : IMaze) : List<Pair<Int,Int>>
 }

@@ -1,6 +1,6 @@
 package maze.generator
 
-import maze.Maze
+import maze.app.Maze
 import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell
@@ -34,7 +34,7 @@ class RandomGenerator(override var size: Pair<Int, Int>) : IGenerator {
                 }
             }
         }
-        m[1,1] =Cell.START
+        m[1,1] = Cell.START
         m[size.first-2,size.second-2] = Cell.END
         return m
     }

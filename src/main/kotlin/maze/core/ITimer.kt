@@ -2,6 +2,6 @@ package maze.core
 
 import kotlin.time.Duration
 
-interface SpeedTimer {
+interface ITimer {
     fun time() : Duration
 }

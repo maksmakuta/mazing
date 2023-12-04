@@ -1,4 +1,4 @@
-package maze
+package maze.app
 
 import maze.core.IMaze
 import maze.core.ISolvable

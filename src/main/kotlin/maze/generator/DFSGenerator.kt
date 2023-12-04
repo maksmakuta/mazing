@@ -1,6 +1,6 @@
 package maze.generator
 
-import maze.Maze
+import maze.app.Maze
 import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell
@@ -20,6 +20,10 @@ class DFSGenerator(override var size: Pair<Int, Int>) : IGenerator {
         Pair( 0,  1)
     )
 
+    override fun time(): Duration {
+        return t
+    }
+
     override fun generate(seed : Long): IMaze {
         val rand = Random(seed)
         val m = Maze(size.first,size.second)
@@ -33,11 +37,7 @@ class DFSGenerator(override var size: Pair<Int, Int>) : IGenerator {
         return m
     }
 
-    override fun time(): Duration {
-        return t
-    }
-
-    private fun run(maze: Maze,random: Random){
+    private fun run(maze: Maze, random: Random){
         val stack = Stack<Pair<Int, Int>>()
         val start = Pair(1, 1)
 

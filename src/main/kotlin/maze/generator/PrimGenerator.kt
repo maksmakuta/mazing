@@ -1,6 +1,6 @@
 package maze.generator
 
-import maze.Maze
+import maze.app.Maze
 import maze.core.IGenerator
 import maze.core.IMaze
 import maze.enums.Cell

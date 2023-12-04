@@ -1,6 +1,6 @@
 package maze.core
 
-interface IGenerator : SpeedTimer{
+interface IGenerator : ITimer{
     var size : Pair<Int,Int>
     fun generate(seed : Long) : IMaze
 }

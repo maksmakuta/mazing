@@ -1,4 +1,4 @@
-package maze
+package maze.app
 
 import maze.core.IGenerator
 import maze.core.IPrinter
