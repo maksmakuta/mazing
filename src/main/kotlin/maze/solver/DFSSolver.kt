@@ -19,10 +19,6 @@ class DFSSolver : ISolver {
         time = measureTime {
             dfs(maze.start(), maze)
         }
-        println("path :")
-        path.forEach {
-            println(it)
-        }
         return path
     }
 

@@ -2,6 +2,7 @@ package maze.generator
 
 import maze.core.Maze
 import maze.core.IGenerator
+import maze.core.Point
 import maze.core.Size
 import maze.enums.Cell
 import java.util.*
@@ -11,6 +12,7 @@ import kotlin.time.measureTime
 class PrimGenerator(override var size: Size) : IGenerator {
 
     private var rand = Random()
+    private val m = Maze(size)
     private var t = Duration.ZERO
     private val walls: MutableList<Wall> = mutableListOf()
 
@@ -18,7 +20,6 @@ class PrimGenerator(override var size: Size) : IGenerator {
 
     override fun generate(seed: Long): Maze {
         rand = Random(seed)
-        val m = Maze(size, seed, 0F)
         m.fill(Cell.WALL)
         t = measureTime {
             generateMaze(m)
@@ -26,6 +27,11 @@ class PrimGenerator(override var size: Size) : IGenerator {
         m[m.start()] = Cell.START
         m[m.end()] = Cell.END
         return m
+    }
+
+    override fun setPoints(start: Point, end: Point) {
+        m.setStart(start)
+        m.setEnd(end)
     }
 
     override fun time(): Duration {

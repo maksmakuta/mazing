@@ -18,6 +18,8 @@ import kotlin.time.Duration
 class MazeApp{
 
     private var size = Size(5,5)
+    private var startPoint = Point(1,1)
+    private var endPoint = Point(size.w-2,size.h-2)
     private var gen : IGenerator = RandomGenerator(size)
     private var sol : ISolver? = null
     private var prt : IPrinter = WidePrinter()
@@ -25,6 +27,12 @@ class MazeApp{
     fun setSize(w : Int,h : Int){
         size = Size(w+1,h+1)
         gen.size = size
+        startPoint = Point(1,1)
+        endPoint = Point(size.w-2,size.h-2)
+    }
+
+    fun setSize(s : Size){
+        setSize(s.w,s.h)
     }
 
     fun withGenerator(generator: Generator){
@@ -54,11 +62,20 @@ class MazeApp{
         return Random.nextLong()
     }
 
+    fun setStart(point: Point){
+        startPoint = point
+    }
+
+    fun setEnd(point: Point){
+        endPoint = point
+    }
+
     fun getGenTime() = gen.time()
     fun getSolTime() = sol?.time() ?: Duration.ZERO
 
     fun exec(seed : Long = randSeed()){
         println("seed : $seed")
+        gen.setPoints(startPoint,endPoint)
         val m = gen.generate(seed)
         m.solve(sol)
         prt.print(m)

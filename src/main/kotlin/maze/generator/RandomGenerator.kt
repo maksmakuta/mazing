@@ -2,6 +2,7 @@ package maze.generator
 
 import maze.core.Maze
 import maze.core.IGenerator
+import maze.core.Point
 import maze.core.Size
 import maze.enums.Cell
 import kotlin.random.Random
@@ -10,11 +11,11 @@ import kotlin.time.measureTime
 
 class RandomGenerator(override var size: Size) : IGenerator {
 
+    private val m = Maze(size)
     private var t = Duration.ZERO
 
     override fun generate(seed : Long): Maze {
         val rnd = Random(seed)
-        val m = Maze(size,seed,0F)
         t = measureTime {
             val walls = mutableListOf<Int>()
             size.iterate{ i,j ->
@@ -34,6 +35,11 @@ class RandomGenerator(override var size: Size) : IGenerator {
         m[m.start()] = Cell.START
         m[m.end()] = Cell.END
         return m
+    }
+
+    override fun setPoints(start: Point, end: Point) {
+        m.setStart(start)
+        m.setEnd(end)
     }
 
     override fun time(): Duration {

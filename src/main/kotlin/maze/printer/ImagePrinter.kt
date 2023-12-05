@@ -36,7 +36,7 @@ class ImagePrinter : IPrinter {
         }
         g2d.dispose()
         try {
-            val outputfile = File("${maze.seed}.png")
+            val outputfile = File("${maze.seed()}.png")
             ImageIO.write(image, "png", outputfile)
             println("Image saved to: ${outputfile.absolutePath}")
         } catch (e: IOException) {

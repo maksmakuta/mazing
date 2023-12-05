@@ -3,13 +3,11 @@ package maze.core
 import maze.enums.Cell
 
 class Maze(
-    val size : Size,
-    val seed : Long,
-    private var difficulty : Float
+    val size : Size
 ){
 
     private var data = Array(size.w){ Array(size.h) { Cell.EMPTY } }
-
+    private var seed = 0L
     private var startPoint = Point(1,1)
     private var endPoint = Point(size.w-2,size.h-2)
 
@@ -18,7 +16,7 @@ class Maze(
 
     fun start() = startPoint
     fun end() = endPoint
-    fun diff() = difficulty
+    fun seed() = seed
 
     fun setStart(p : Point){
         startPoint = p
@@ -26,6 +24,10 @@ class Maze(
 
     fun setEnd(p : Point){
         endPoint = p
+    }
+
+    fun setSeed(s : Long){
+        seed = s
     }
 
     operator fun set(x : Int,y : Int,value : Cell){

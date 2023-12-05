@@ -6,7 +6,6 @@ import maze.core.Point
 import maze.core.Size
 import maze.enums.Cell
 import java.util.*
-import kotlin.math.hypot
 import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
@@ -14,6 +13,7 @@ import kotlin.time.measureTime
 class DFSGenerator(override var size: Size) : IGenerator {
 
     private var t = Duration.ZERO
+    private val maze = Maze(size)
     private val visited: Array<Array<Boolean>> = Array(size.w) { Array(size.h) { false } }
 
     override fun time(): Duration {
@@ -22,14 +22,18 @@ class DFSGenerator(override var size: Size) : IGenerator {
 
     override fun generate(seed : Long): Maze {
         val rand = Random(seed)
-        val m = Maze(size,seed,0F)
-        m.fill(Cell.WALL)
+        maze.fill(Cell.WALL)
         t = measureTime {
-            run(m, rand)
+            run(maze, rand)
         }
-        m[m.start()] = Cell.START
-        m[m.end()] = Cell.END
-        return m
+        maze[maze.start()] = Cell.START
+        maze[maze.end()] = Cell.END
+        return maze
+    }
+
+    override fun setPoints(start: Point, end: Point) {
+        maze.setStart(start)
+        maze.setEnd(end)
     }
 
     private fun run(maze: Maze, random: Random){

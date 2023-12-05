@@ -9,4 +9,21 @@ class Size(val w : Int, val h : Int) {
             }
         }
     }
+
+    companion object{
+        val SPLITERS = listOf(
+            "x","..","..<","_"
+        )
+
+        fun parse(str : String) : Size{
+            SPLITERS.forEach{
+                if(str.contains(it)){
+                    val t = str.split(it)
+                    return Size(t.first().toInt(),t.last().toInt())
+                }
+            }
+            println("no delimiter found")
+            return Size(0,0)
+        }
+    }
 }

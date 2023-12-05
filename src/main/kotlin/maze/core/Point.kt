@@ -34,8 +34,17 @@ class Point(val x : Int, val y : Int) {
     }
 
     companion object{
-        fun Pair<Int,Int>.toPoint() : Point {
-            return Point(this.first,this.second)
+        fun parse(string: String) : Point{
+            listOf(
+                ",",":",";","-"
+            ).forEach {
+                if(string.contains(it)){
+                    val t = string.split(it)
+                    return Point(t.first().toInt(),t.last().toInt())
+                }
+            }
+            println("No delimiters found")
+            return Point(0,0)
         }
 
         val DIRECTIONS = listOf(
