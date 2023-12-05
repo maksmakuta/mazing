@@ -1,14 +1,14 @@
 package maze.generator
 
-import maze.app.Maze
+import maze.core.Maze
 import maze.core.IGenerator
-import maze.core.IMaze
+import maze.core.Size
 import maze.enums.Cell
 import java.util.*
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class PrimGenerator(override var size: Pair<Int, Int>) : IGenerator {
+class PrimGenerator(override var size: Size) : IGenerator {
 
     private var rand = Random()
     private var t = Duration.ZERO
@@ -16,16 +16,15 @@ class PrimGenerator(override var size: Pair<Int, Int>) : IGenerator {
 
     private data class Wall(val row : Int, val col : Int,val dir : Int)
 
-    override fun generate(seed: Long): IMaze {
+    override fun generate(seed: Long): Maze {
         rand = Random(seed)
-        val m = Maze(size.first, size.second)
-        m.seed = seed
+        val m = Maze(size, seed, 0F)
         m.fill(Cell.WALL)
         t = measureTime {
             generateMaze(m)
         }
-        m[1,1] = Cell.START
-        m[size.first-2, size.second-2] = Cell.END
+        m[m.start()] = Cell.START
+        m[m.end()] = Cell.END
         return m
     }
 
@@ -47,13 +46,13 @@ class PrimGenerator(override var size: Pair<Int, Int>) : IGenerator {
         for(i in 0 ..< 3) {
             val (x,y) = dir(dir,i)
             if (t) {
-                t = (((row+x) in 1..size.first - 2) &&( (col+y) in 1..size.second - 2))
+                t = (((row+x) in 1..size.w - 2) &&( (col+y) in 1..size.h - 2))
             }
         }
         return t
     }
 
-    private fun generateMaze(maze: IMaze) {
+    private fun generateMaze(maze: Maze) {
         addWallsToList(1,1)
         while (walls.isNotEmpty()) {
             val randomWallIndex = rand.nextInt(walls.size)
@@ -75,11 +74,11 @@ class PrimGenerator(override var size: Pair<Int, Int>) : IGenerator {
     private fun addWallsToList(row: Int, col: Int) {
         if (row >= 1)
             walls.add(Wall(row, col,1))
-        if (row <= size.first - 2)
+        if (row <= size.w - 2)
             walls.add(Wall(row, col,2))
         if (col >= 1)
             walls.add(Wall(row, col,3))
-        if (col <= size.second - 2)
+        if (col <= size.h - 2)
             walls.add(Wall(row, col,4))
     }
 

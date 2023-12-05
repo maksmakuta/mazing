@@ -1,18 +1,18 @@
 package maze.generator
 
-import maze.app.Maze
 import maze.core.IGenerator
-import maze.core.IMaze
+import maze.core.Maze
+import maze.core.Size
 import kotlin.time.Duration
 
-class HardGenerator(override var size: Pair<Int, Int>) : IGenerator {
+class HardGenerator(override var size: Size) : IGenerator {
 
     private var t = Duration.ZERO
 
-    override fun generate(seed: Long): IMaze {
-        val maze = Maze(size.first,size.second)
+    override fun generate(seed: Long): Maze {
+        val m = Maze(size,seed,0F)
 
-        return maze
+        return m
     }
 
     override fun time(): Duration {

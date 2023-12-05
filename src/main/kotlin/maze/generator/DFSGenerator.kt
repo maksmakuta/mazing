@@ -1,54 +1,46 @@
 package maze.generator
 
-import maze.app.Maze
+import maze.core.Maze
 import maze.core.IGenerator
-import maze.core.IMaze
+import maze.core.Point
+import maze.core.Size
 import maze.enums.Cell
 import java.util.*
+import kotlin.math.hypot
 import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class DFSGenerator(override var size: Pair<Int, Int>) : IGenerator {
+class DFSGenerator(override var size: Size) : IGenerator {
 
     private var t = Duration.ZERO
-    private val visited: Array<Array<Boolean>> = Array(size.second) { Array(size.first) { false } }
-    private val directions = arrayOf(
-        Pair(-1,  0),
-        Pair( 1,  0),
-        Pair( 0, -1),
-        Pair( 0,  1)
-    )
+    private val visited: Array<Array<Boolean>> = Array(size.w) { Array(size.h) { false } }
 
     override fun time(): Duration {
         return t
     }
 
-    override fun generate(seed : Long): IMaze {
+    override fun generate(seed : Long): Maze {
         val rand = Random(seed)
-        val m = Maze(size.first,size.second)
-        m.seed = seed
+        val m = Maze(size,seed,0F)
         m.fill(Cell.WALL)
         t = measureTime {
             run(m, rand)
         }
-        m[1,1] = Cell.START
-        m[size.first-2,size.second-2] = Cell.END
+        m[m.start()] = Cell.START
+        m[m.end()] = Cell.END
         return m
     }
 
     private fun run(maze: Maze, random: Random){
-        val stack = Stack<Pair<Int, Int>>()
-        val start = Pair(1, 1)
-
-        stack.push(start)
-        visited[start.first][start.second] = true
-
+        val stack = Stack<Point>()
+        stack.push(maze.start())
+        visited[maze.start().x][maze.start().y] = true
         while (stack.isNotEmpty()) {
             val current = stack.pop()
             val (row, col) = current
             maze[row,col] = Cell.EMPTY
-            val neighbors = getUnvisitedNeighbors(row, col)
+            val neighbors = getUnvisitedNeighbors(current,maze)
             if (neighbors.isNotEmpty()) {
                 stack.push(current)
                 val randomNeighbor = neighbors.random(random)
@@ -60,13 +52,12 @@ class DFSGenerator(override var size: Pair<Int, Int>) : IGenerator {
         }
     }
 
-    private fun getUnvisitedNeighbors(row: Int, col: Int): List<Pair<Int, Int>> {
-        val neighbors = mutableListOf<Pair<Int, Int>>()
-        for ((dr, dc) in directions) {
-            val newRow = row + 2 * dr
-            val newCol = col + 2 * dc
-            if (newRow in 1..<size.second-1 && newCol in 1..<size.first-1 && !visited[newRow][newCol]) {
-                neighbors.add(Pair(newRow, newCol))
+    private fun getUnvisitedNeighbors(point: Point,maze: Maze): List<Point> {
+        val neighbors = mutableListOf<Point>()
+        for (dir in Point.DIRECTIONS) {
+            val newPoint = point + (dir * 2)
+            if(newPoint in maze && !visited[newPoint.x][newPoint.y]){
+                neighbors.add(newPoint)
             }
         }
         return neighbors

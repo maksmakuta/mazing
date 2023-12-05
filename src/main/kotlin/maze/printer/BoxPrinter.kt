@@ -1,7 +1,7 @@
 package maze.printer
 
-import maze.core.IMaze
 import maze.core.IPrinter
+import maze.core.Maze
 import maze.enums.Cell
 
 class BoxPrinter : IPrinter {
@@ -18,9 +18,9 @@ class BoxPrinter : IPrinter {
         "┼"              // 12
     )
 
-    override fun print(maze: IMaze) {
-        for(i in 0..<maze.size().first){
-            for(j in 0..<maze.size().second){
+    override fun print(maze: Maze) {
+        for(i in 0..<maze.width){
+            for(j in 0..<maze.height){
                 val cell = maze[i,j]
                 val c = when(cell){
                     Cell.WALL  -> {
@@ -33,7 +33,7 @@ class BoxPrinter : IPrinter {
                             for(b in -1 .. 1){
                                 val x = i + a
                                 val y = j + b
-                                if(x in 0..<maze.size().first && y in 0..<maze.size().second){
+                                if(x in 0..<maze.width && y in 0..<maze.height){
                                     arr[a+1][b+1] = (maze[x,y] == Cell.WALL)
                                 }
                             }
@@ -93,7 +93,7 @@ class BoxPrinter : IPrinter {
                             for(b in -1 .. 1){
                                 val x = i + a
                                 val y = j + b
-                                if(x in 0..<maze.size().first && y in 0..<maze.size().second){
+                                if(x in 0..<maze.width && y in 0..<maze.height){
                                     arr[a+1][b+1] = (maze[x,y] == Cell.PATH)
                                 }
                             }

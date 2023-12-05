@@ -1,5 +1,5 @@
 package maze.core
 
 interface IPrinter {
-    fun print(maze: IMaze)
+    fun print(maze: Maze)
 }

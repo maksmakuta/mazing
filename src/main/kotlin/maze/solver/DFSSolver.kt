@@ -1,21 +1,27 @@
 package maze.solver
 
-import maze.core.IMaze
-import maze.core.ISolvable
+import maze.core.ISolver
+import maze.core.Maze
+import maze.core.Point
 import maze.enums.Cell
 import kotlin.time.Duration
 import kotlin.time.measureTime
 
-class DFSSolver : ISolvable {
+class DFSSolver : ISolver {
 
     private lateinit var visited : Array<BooleanArray>
-    private val path = mutableListOf<Pair<Int, Int>>()
+    private val path = mutableListOf<Point>()
     private var time = Duration.ZERO
 
-    override fun solve(maze: IMaze): List<Pair<Int, Int>> {
-        visited = Array(maze.size().first) { BooleanArray(maze.size().second){ false } }
+    override fun solve(maze: Maze): List<Point> {
+        path.clear()
+        visited = Array(maze.width) { BooleanArray(maze.height){ false } }
         time = measureTime {
-            dfs(1, 1, maze)
+            dfs(maze.start(), maze)
+        }
+        println("path :")
+        path.forEach {
+            println(it)
         }
         return path
     }
@@ -24,21 +30,19 @@ class DFSSolver : ISolvable {
         return time
     }
 
-    private fun dfs(x : Int,y : Int,maze: IMaze) : Boolean{
-        if (x < 0 || x >= maze.size().first || y < 0 || y >= maze.size().second || maze[x,y] == Cell.WALL || visited[x][y]) {
+    private fun dfs(point: Point,maze: Maze) : Boolean{
+        if (point !in maze || maze[point] == Cell.WALL || visited[point.x][point.y]) {
             return false
         }
-        if (x == maze.end().first && y == maze.end().second) {
-            path.add(x to y)
+        if (point == maze.end()) {
+            path.add(point)
             return true
         }
-        visited[x][y] = true
-        val directions = listOf(-1 to 0, 1 to 0, 0 to -1, 0 to 1)
-        for ((dx, dy) in directions) {
-            val newRow = x + dx
-            val newCol = y + dy
-            if (dfs(newRow, newCol,maze)) {
-                path.add(x to y)
+        visited[point.x][point.y] = true
+        for (dir in Point.DIRECTIONS) {
+            val newPoint = point + dir
+            if (dfs(newPoint,maze)) {
+                path.add(newPoint)
                 return true
             }
         }

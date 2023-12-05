@@ -1,8 +1,6 @@
 package maze.app
 
-import maze.core.IGenerator
-import maze.core.IPrinter
-import maze.core.ISolvable
+import maze.core.*
 import maze.enums.Generator
 import maze.enums.Printer
 import maze.enums.Solver
@@ -14,20 +12,18 @@ import maze.printer.ImagePrinter
 import maze.printer.WidePrinter
 import maze.solver.BFSSolver
 import maze.solver.DFSSolver
-import maze.solver.StarSolver
-import maze.solver.WalkerSolver
 import kotlin.random.Random
 import kotlin.time.Duration
 
 class MazeApp{
 
-    private var size = Pair(5,5)
+    private var size = Size(5,5)
     private var gen : IGenerator = RandomGenerator(size)
-    private var sol : ISolvable? = null
+    private var sol : ISolver? = null
     private var prt : IPrinter = WidePrinter()
 
     fun setSize(w : Int,h : Int){
-        size = Pair(w+1,h+1)
+        size = Size(w+1,h+1)
         gen.size = size
     }
 
@@ -41,8 +37,6 @@ class MazeApp{
 
     fun withSolver(solver: Solver) {
         sol = when (solver){
-            Solver.RND      -> WalkerSolver()
-            Solver.Astar    -> StarSolver()
             Solver.BFS      -> BFSSolver()
             Solver.DFS      -> DFSSolver()
         }

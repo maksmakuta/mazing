@@ -1,18 +1,17 @@
 package maze.printer
 
-import maze.core.IMaze
 import maze.core.IPrinter
+import maze.core.Maze
 import maze.enums.Cell
 
 class WidePrinter : IPrinter {
 
-    override fun print(maze: IMaze) {
-        val s = maze.size()
-        for(i in 0 ..< s.first){
-            for(j in 0 ..< s.second){
-                print(getCell(maze[i,j]))
+    override fun print(maze: Maze) {
+        maze.size.iterate{ i,j ->
+            print(getCell(maze[i,j]))
+            if(j == maze.height - 1){
+                println()
             }
-            println()
         }
     }
 

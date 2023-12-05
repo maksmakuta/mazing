@@ -1,7 +1,7 @@
 package maze.printer
 
-import maze.core.IMaze
 import maze.core.IPrinter
+import maze.core.Maze
 import maze.enums.Cell
 import java.awt.Color
 import java.awt.Graphics2D
@@ -12,16 +12,18 @@ import javax.imageio.ImageIO
 
 class ImagePrinter : IPrinter {
 
-    override fun print(maze: IMaze) {
+    companion object{
         val CELL_SIZE = 10
-        val width = maze.size().first * CELL_SIZE
-        val height = maze.size().second * CELL_SIZE
+    }
+
+    override fun print(maze: Maze) {
+        val width = maze.width * CELL_SIZE
+        val height = maze.height * CELL_SIZE
         val image = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
         val g2d: Graphics2D = image.createGraphics()
         g2d.color = Color.WHITE
         g2d.fillRect(0, 0, width, height)
-        for(i in 0 ..< maze.size().first){
-            for(j in 0 ..< maze.size().second){
+        maze.size.iterate{ i,j ->
                 val cell = maze[i,j]
                 val color = when(cell){
                     Cell.PATH   -> Color.RED
@@ -31,7 +33,6 @@ class ImagePrinter : IPrinter {
                 }
                 g2d.color = color
                 g2d.fillRect(i* CELL_SIZE,j* CELL_SIZE, CELL_SIZE, CELL_SIZE)
-            }
         }
         g2d.dispose()
         try {
