@@ -75,8 +75,6 @@ class Maze(
                 val c = this[point]
                 if(c == Cell.EMPTY){
                     this[point] = Cell.PATH
-                }else{
-                    println("$point is a ${c.name}")
                 }
             }
         }

@@ -1,6 +1,7 @@
 package maze.printer
 
 import maze.core.IPrinter
+import maze.core.IPrinter.Companion.CELL_SIZE
 import maze.core.Maze
 import maze.enums.Cell
 import java.awt.Color
@@ -10,11 +11,7 @@ import java.io.File
 import java.io.IOException
 import javax.imageio.ImageIO
 
-class ImagePrinter : IPrinter {
-
-    companion object{
-        val CELL_SIZE = 10
-    }
+class PNGPrinter : IPrinter {
 
     override fun print(maze: Maze) {
         val width = maze.width * CELL_SIZE
@@ -26,10 +23,11 @@ class ImagePrinter : IPrinter {
         maze.size.iterate{ i,j ->
                 val cell = maze[i,j]
                 val color = when(cell){
-                    Cell.PATH   -> Color.RED
+                    Cell.PATH   -> Color.ORANGE
                     Cell.WALL   -> Color.BLACK
                     Cell.EMPTY  -> Color.WHITE
-                    else -> Color.GRAY
+                    Cell.END    -> Color.GREEN
+                    Cell.START  -> Color.RED
                 }
                 g2d.color = color
                 g2d.fillRect(i* CELL_SIZE,j* CELL_SIZE, CELL_SIZE, CELL_SIZE)

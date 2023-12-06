@@ -16,6 +16,7 @@ class RandomGenerator(override var size: Size) : IGenerator {
 
     override fun generate(seed : Long): Maze {
         val rnd = Random(seed)
+        m.setSeed(seed)
         t = measureTime {
             val walls = mutableListOf<Int>()
             size.iterate{ i,j ->

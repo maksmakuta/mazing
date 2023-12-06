@@ -8,7 +8,8 @@ import maze.generator.DFSGenerator
 import maze.generator.PrimGenerator
 import maze.generator.RandomGenerator
 import maze.printer.BoxPrinter
-import maze.printer.ImagePrinter
+import maze.printer.PNGPrinter
+import maze.printer.SVGPrinter
 import maze.printer.WidePrinter
 import maze.solver.BFSSolver
 import maze.solver.DFSSolver
@@ -54,7 +55,8 @@ class MazeApp{
         prt = when(prnt){
             Printer.BOX -> BoxPrinter()
             Printer.WIDE -> WidePrinter()
-            Printer.IMG -> ImagePrinter()
+            Printer.PNG -> PNGPrinter()
+            Printer.SVG -> SVGPrinter()
         }
     }
 

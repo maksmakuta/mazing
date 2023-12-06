@@ -13,6 +13,7 @@ class HardGenerator(override var size: Size) : IGenerator {
     private val maze = Maze(size)
 
     override fun generate(seed: Long): Maze {
+        maze.setSeed(seed)
 
         return maze
     }

@@ -20,6 +20,7 @@ class PrimGenerator(override var size: Size) : IGenerator {
 
     override fun generate(seed: Long): Maze {
         rand = Random(seed)
+        m.setSeed(seed)
         m.fill(Cell.WALL)
         t = measureTime {
             generateMaze(m)

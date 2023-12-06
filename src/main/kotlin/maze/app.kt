@@ -61,7 +61,7 @@ fun help(){
     println("\t --size \t\t set size: WxH ex: 20x30 or 26..75")
     println("\t --gen  \t\t set generator: RND, DFS, IRP")
     println("\t --sol  \t\t set solver: DFS, BFS")
-    println("\t --prt  \t\t set printer: WIDE, BOX, IMG")
+    println("\t --prt  \t\t set printer: WIDE, BOX, PNG, SVG")
     println("\t --seed \t\t set seed")
     println("\t --start \t\t set start point: 5,9")
     println("\t --end \t\t set end point: 15,5")
@@ -100,10 +100,17 @@ private fun parse(args : Array<String>) : Map<String,ArrayList<String>>{
 }
 
 fun main(args : Array<String>) {
-    if(args.isNotEmpty())
-        cli(parse(args))
-    else
-        help()
+//    if(args.isNotEmpty())
+//        cli(parse(args))
+//    else
+//        help()
+
+
+    val app = MazeApp()
+    app.setSize(20,20)
+    app.withGenerator(Generator.IRP)
+    app.withPrinter(Printer.SVG)
+    app.exec(0)
 }
 
 
