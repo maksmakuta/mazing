@@ -50,7 +50,6 @@ class ASolver : ISolver {
     private fun run(maze: Maze) : Item?{
         while(q.isNotEmpty()) {
             val item = q.poll()
-            println("${item.point} :: ${item.priority}")
             if (item.point !in closed) {
                 closed.add(item.point)
                 for (dir in Point.DIRECTIONS) {
@@ -59,7 +58,7 @@ class ASolver : ISolver {
                         val f = item.priority + h(p, maze.end())
                         if (p == maze.end()) {
                             println("Found end")
-                            return Item(p,f,item)
+                            return Item(p, f, item)
                         }
                         q.add(Item(p, f, item))
                     }
