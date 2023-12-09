@@ -107,10 +107,10 @@ fun main(args : Array<String>) {
 
 
     val app = MazeApp()
-    app.setSize(20,20)
-    app.withGenerator(Generator.IRP)
-    app.withPrinter(Printer.SVG)
+    app.setSize(150,50)
+    app.withGenerator(Generator.IRK)
+        //app.withSolver(Solver.Astar)
+    app.withPrinter(Printer.PNG)
     app.exec(0)
+    println("solve : ${app.getSolTime()}")
 }
-
-

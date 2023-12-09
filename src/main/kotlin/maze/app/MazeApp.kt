@@ -5,12 +5,14 @@ import maze.enums.Generator
 import maze.enums.Printer
 import maze.enums.Solver
 import maze.generator.DFSGenerator
+import maze.generator.KruskalGenerator
 import maze.generator.PrimGenerator
 import maze.generator.RandomGenerator
 import maze.printer.BoxPrinter
 import maze.printer.PNGPrinter
 import maze.printer.SVGPrinter
 import maze.printer.WidePrinter
+import maze.solver.ASolver
 import maze.solver.BFSSolver
 import maze.solver.DFSSolver
 import kotlin.random.Random
@@ -41,6 +43,7 @@ class MazeApp{
             Generator.RND -> RandomGenerator(size)
             Generator.DFS -> DFSGenerator(size)
             Generator.IRP -> PrimGenerator(size)
+            Generator.IRK -> KruskalGenerator(size)
         }
     }
 
@@ -48,6 +51,7 @@ class MazeApp{
         sol = when (solver){
             Solver.BFS      -> BFSSolver()
             Solver.DFS      -> DFSSolver()
+            Solver.Astar    -> ASolver()
         }
     }
 

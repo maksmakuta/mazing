@@ -1,44 +1,15 @@
 # mazing
 
- Console app for Maze
-
-## Examples
-
-### Prims with WIDE Printer
-
-    seed : -8741113540676781898
-    ##########################################
-    ##SS                            ##      ##
-    ######  ##################  ##  ##  ######
-    ##              ##      ##  ##          ##
-    ######  ##  ##  ######  ######  ##########
-    ##      ##  ##      ##  ##  ##      ##  ##
-    ######  ######  ######  ##  ##########  ##
-    ##          ##                          ##
-    ##  ##  ##  ######  ##  ######  ##########
-    ##  ##  ##      ##  ##      ##          ##
-    ######  ######  ##  ######################
-    ##      ##  ##  ##                  ##  ##
-    ######  ##  ##########  ######  ######  ##
-    ##          ##  ##  ##      ##      ##  ##
-    ######  ##  ##  ##  ##  ######  ######  ##
-    ##      ##          ##  ##              ##
-    ##  ##  ##########  ######  ##############
-    ##  ##      ##  ##  ##                  ##
-    ##  ##  ##  ##  ##########  ##  ######  ##
-    ##  ##  ##          ##      ##      ##EE##
-    ##########################################
-
-### DFS with DFS solver
-
- ![dfs](img/5183325616407503137.png)
+ Console app for Maze  
+ 
+## [Examples](./examples.md)
 
 ## Generators ([link](https://en.wikipedia.org/wiki/Maze_generation_algorithm))
  
   - [X] Random Wall placing algorithm
   - [X] DFS
   - [X] Prims
-  - [ ] Kruskal's
+  - [X] Kruskal's
   - [ ] Wilson's
   - [ ] Aldous-Broder
   - [ ] Recursive division method
@@ -52,7 +23,7 @@
  - [ ] Tremaux's algorithm
  - [ ] Recursive algorithm
  - [ ] Maze-routing algorithm
- - [ ] A*
+ - [X] A*
 
 ## Printers
 

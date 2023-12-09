@@ -7,6 +7,7 @@ class SVGPrinter : IPrinter {
 
     override fun print(maze: Maze) {
     //    val output = File("${maze.seed()}.svg")
+        print("In development")
     }
 
 }
