@@ -104,11 +104,12 @@ fun main(args : Array<String>) {
         cli(parse(args))
     else {
         val app = MazeApp()
-        app.setSize(150, 50)
+        app.setSize(50, 50)
         app.withGenerator(Generator.IRK)
-        app.withSolver(Solver.Astar)
+        app.withSolver(Solver.BFS)
         app.withPrinter(Printer.PNG)
-        app.exec(0)
+        app.exec()
+        println("gen   : ${app.getGenTime()}")
         println("solve : ${app.getSolTime()}")
     }
 }

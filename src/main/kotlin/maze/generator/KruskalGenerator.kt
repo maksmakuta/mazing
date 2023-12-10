@@ -18,6 +18,7 @@ class KruskalGenerator(override var size: Size) : IGenerator {
     private val sets = mutableListOf<MutableList<Point>>()
 
     override fun generate(seed: Long): Maze {
+        maze.setSeed(seed)
         rand = Random(seed)
         setup()
         t = measureTime {

@@ -1,8 +1,7 @@
 # mazing
 
  Console app for Maze  
- 
-## [Examples](./examples.md)
+ [Examples](./examples.md)
 
 ## Generators ([link](https://en.wikipedia.org/wiki/Maze_generation_algorithm))
  
@@ -20,10 +19,10 @@
 
  - [X] DFS
  - [X] BFS
+ - [X] A*
  - [ ] Tremaux's algorithm
  - [ ] Recursive algorithm
  - [ ] Maze-routing algorithm
- - [X] A*
 
 ## Printers
 
@@ -37,6 +36,12 @@
      - [ ] generation & solving
      - [ ] generation
      - [ ] solving
+
+### Other features
+
+ - [ ] Import
+ - [ ] Export
+ - [ ] GUI (with -gui parameter)
 
 ## Author
   
